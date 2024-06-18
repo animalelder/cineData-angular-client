@@ -19,11 +19,14 @@
         <input
           matInput
           [(ngModel)]="userData.password"
-          type = "password"
+          [type]="hide ? 'password' : 'text'"
           placeholder="Password"
           name="Password"
           required
         >
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
       </mat-form-field>
     </form>
   </mat-card-content>

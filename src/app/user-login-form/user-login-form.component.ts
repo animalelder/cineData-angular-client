@@ -43,4 +43,5 @@ export class UserLoginFormComponent {
       }
     );
   }
+  hide = true;
 }

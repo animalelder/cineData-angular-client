@@ -4,7 +4,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { provideHttpClient } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-
+import { MatIconModule } from '@angular/material/icon';
+import { MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -23,6 +24,8 @@ import { UserLoginFormComponent } from './user-login-form/user-login-form.compon
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
+    MatIconModule,
+    MatLabel,
     MatInputModule,
     MatButtonModule,
     MatCardModule,
