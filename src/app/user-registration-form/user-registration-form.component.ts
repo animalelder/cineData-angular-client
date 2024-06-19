@@ -45,4 +45,5 @@ export class UserRegistrationFormComponent implements OnInit {
     );
   }
   hide = true;
+  startDate = new Date(1990, 0, 1);
 }
