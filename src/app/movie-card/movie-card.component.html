@@ -1,31 +1,37 @@
 <!-- src/app/movie-card/movie-card.component.html -->
-<div style="display: flex; gap: 1rem;">
-    <mat-card *ngFor="let movie of movies; let i=index;" style="padding: 0 0.8rem; flex: 1 1 auto;" >
-        <mat-card-header>
-        <mat-card-title>{{movie.title}}</mat-card-title>
-            <mat-card-subtitle>Directed by: {{movie.director.name}}</mat-card-subtitle>
-        </mat-card-header>
-        <img src="{{movie.imagePath}}" alt="{{movie.title}}" style="margin: 0 auto; object-fit: contain" />
+<div style="display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr))">
+   @for(movie of movies; track movie.id; let idx=$index ) {
+    <mat-card style="flex: 1 1 auto; padding: 5px 5px; align-items: center;" appearance="raised" >
+        <mat-card-title-group style="display: block;">
+        <mat-card-title style="text-align: center;">@if(movie.title[21]){ {{ movie.title.slice(0,20).concat('...') | uppercase}} } @else{ {{ movie.title | uppercase }} }</mat-card-title>
+            <mat-card-subtitle>{{movie.director.name | uppercase}}</mat-card-subtitle>
+        </mat-card-title-group>
+        <img mat-card-image src="{{movie.imagePath}}" alt="{{movie.title}}" loading="lazy"/>
         <mat-card-actions>
             <button
-                mat-flat-button
+                mat-button
                 color="primary"
             >
                 Genre
             </button>
             <button
-                mat-flat-button
+                mat-button
                 color="primary"
             >
                 Director
             </button>
             <button
-                mat-flat-button
+                mat-button
                 color="primary"
             >
                 Synopsis
             </button>
             <mat-icon>favorite_border</mat-icon>
         </mat-card-actions>
-    </mat-card>
+    </mat-card>}
+    @empty {
+        <div style="width: 100vw; height: 100svh; margin: auto;">
+        <h1 class="loading">Movies are still loading. Thank you for your patience.</h1>
+        </div>
+        }
 </div>

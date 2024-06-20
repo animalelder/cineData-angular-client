@@ -2,16 +2,15 @@
 // For more information: https://material.angular.io/guide/theming
 html,
 body {
-  height: 100svh;
+  height: 100%;
 }
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
-.main-page {
-  gap: 1rem;
-  margin: auto;
-  padding: 0 1rem;
-  max-width: fit-content;
-}
+// .main-page {
+//   gap: 1rem;
+//   margin: auto;
+//   padding: 0 1rem;
+// }
