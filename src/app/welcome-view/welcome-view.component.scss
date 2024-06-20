@@ -1,0 +1,68 @@
+$width: minmax(88cqw, 430px);
+
+.background {
+  width: $width;
+  height: 520px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+}
+.background .shape {
+  height: 200px;
+  width: 200px;
+  position: absolute;
+  border-radius: 50%;
+}
+.shape:first-child {
+  background: linear-gradient(#244f1c, #244f1c);
+  left: -250px;
+  top: -120px;
+}
+.shape:last-child {
+  background: linear-gradient(to right, #f9537b, #fb8aa4);
+  right: -250px;
+  bottom: -120px;
+}
+
+.page {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+
+  width: $width;
+  height: 520px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+  padding: 2rem 1rem;
+  display: grid;
+  grid-template-areas: 't t t t' 'i i i i' 'a a b b';
+  justify-content: space-evenly;
+  justify-items: center;
+}
+
+.page h1 {
+  grid-area: t;
+  width: 100%;
+  color: #fff;
+  text-align: center;
+  text-shadow: #ffe6eea6 1px 0 3px;
+}
+
+.page button:first-of-type {
+  grid-area: a;
+  width: 100px;
+}
+
+.page button:last-of-type {
+  grid-area: b;
+  width: 100px;
+}
+
+.page svg {
+  grid-area: i;
+}
