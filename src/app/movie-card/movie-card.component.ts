@@ -40,7 +40,7 @@ export class MovieCardComponent implements OnInit {
   }
 
   getSynopsis(movie: any): void {
-    let synopsis = movie.description.split('. ').reduce((acc: string, curr: string) => acc + curr + '.\n\n', '');
+    let synopsis = movie.description.replace(/(\w{3,10})\.\s/g, '$1.\n\n');
     this.dialog.open(InfoModalComponent, {
       data: { title: movie.title, body: synopsis },
       width: '450px',
