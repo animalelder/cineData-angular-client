@@ -1,0 +1,11 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title style="margin-bottom: 8px;">{{data.title}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content style="white-space: pre-line;">
+        {{data.body}}
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="closeModal()">Close</button>
+    </mat-card-actions>
+</mat-card>
