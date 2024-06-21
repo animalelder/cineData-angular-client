@@ -37,7 +37,8 @@ export class FetchApiDataService {
     return this.http
       .get(apiUrl + 'movies', {
         headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token,
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
         }),
       })
       .pipe(map(this.extractResponseData), catchError(this.handleError));
@@ -49,7 +50,8 @@ export class FetchApiDataService {
     return this.http
       .get(apiUrl + 'movies/' + title, {
         headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token,
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
         }),
       })
       .pipe(map(this.extractResponseData), catchError(this.handleError));
@@ -61,7 +63,8 @@ export class FetchApiDataService {
     return this.http
       .get(apiUrl + 'movies/directors/' + directorName, {
         headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token,
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
         }),
       })
       .pipe(map(this.extractResponseData), catchError(this.handleError));
@@ -73,19 +76,24 @@ export class FetchApiDataService {
     return this.http
       .get(apiUrl + 'movies/genre/' + genreName, {
         headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token,
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
         }),
       })
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
   // Method to get user details
-  public getUser(): string | null {
-    const user = localStorage.getItem('user');
-    if (!user) {
-      throw new Error('An error occurred: no user found! Please login.');
-    }
-    return user;
+  public getUser(userDetails: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    return this.http
+      .get(apiUrl + 'users/' + userDetails.username, {
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        }),
+      })
+      .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
   // Get favorite movies for a user
@@ -94,31 +102,37 @@ export class FetchApiDataService {
     return this.http
       .get(apiUrl + 'users/' + userDetails.username + 'favoriteMovies', {
         headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token,
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
         }),
       })
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
   // Add a movie to favorites
-  public addFavouriteMovies(userDetails: any, movieID: string): Observable<any> {
+  public addFavoriteMovies(movie: any): Observable<any> {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');
     return this.http
-      .post(apiUrl + 'users/' + userDetails.username + '/favorites/' + movieID, {
+      .put(apiUrl + 'users/' + user.username + '/favorites/' + encodeURIComponent(movie._id), null, {
         headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token,
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
         }),
       })
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
   // Remove a movie from favorites
-  public deleteFavouriteMovies(userDetails: any, movieID: string): Observable<any> {
+  public deleteFavoriteMovies(movie: any): Observable<any> {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');
+
     return this.http
-      .delete(apiUrl + 'users/' + userDetails.username + '/favorites/' + movieID, {
+      .delete(apiUrl + 'users/' + user.username + '/favorites/' + encodeURIComponent(movie._id), {
         headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token,
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
         }),
       })
       .pipe(map(this.extractResponseData), catchError(this.handleError));
@@ -130,7 +144,8 @@ export class FetchApiDataService {
     return this.http
       .put(apiUrl + 'users/' + userDetails.username, {
         headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token,
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
         }),
       })
       .pipe(map(this.extractResponseData), catchError(this.handleError));
@@ -142,7 +157,8 @@ export class FetchApiDataService {
     return this.http
       .delete(apiUrl + 'users/' + userDetails.username, {
         headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token,
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
         }),
       })
       .pipe(map(this.extractResponseData), catchError(this.handleError));

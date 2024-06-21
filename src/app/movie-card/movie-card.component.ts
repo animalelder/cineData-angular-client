@@ -1,7 +1,8 @@
 // src/app/movie-card/movie-card.component.ts
 import { Component, OnInit } from '@angular/core';
-import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { FetchApiDataService } from '../fetch-api-data.service';
 import { InfoModalComponent } from '../info-modal/info-modal.component';
 
 @Component({
@@ -11,7 +12,9 @@ import { InfoModalComponent } from '../info-modal/info-modal.component';
 })
 export class MovieCardComponent implements OnInit {
   movies: any[] = [];
-  constructor(public fetchApiData: FetchApiDataService, public dialog: MatDialog) {}
+  userData: any = {};
+
+  constructor(public fetchApiData: FetchApiDataService, public dialog: MatDialog, public snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.getMovies();
@@ -20,7 +23,6 @@ export class MovieCardComponent implements OnInit {
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
-      console.table(this.movies);
       console.log(this.movies);
       return this.movies;
     });
@@ -50,4 +52,49 @@ export class MovieCardComponent implements OnInit {
       width: '450px',
     });
   }
+
+  toggleFavoriteMovie(movie: any): void {
+    let user: {} = JSON.parse(localStorage.getItem('user') || '');
+
+    if (this.isFavoriteMovie(movie)) {
+      this.fetchApiData.deleteFavoriteMovies(movie).subscribe(
+        (res) => {
+          console.log('del success');
+          console.log(res);
+          user = res;
+          localStorage.setItem('user', JSON.stringify(user));
+          this.snackBar.open('Movie has been deleted from your favorites!', 'OK', {
+            duration: 3000,
+          });
+        },
+        (err) => {
+          console.error(err);
+        }
+      );
+    } else {
+      this.fetchApiData.addFavoriteMovies(movie).subscribe(
+        (res) => {
+          console.log('add success');
+          console.log(res);
+          user = res;
+          localStorage.setItem('user', JSON.stringify(user));
+          this.snackBar.open('Movie has been added to your favorites!', 'OK', {
+            duration: 3000,
+          });
+        },
+        (err) => {
+          console.error(err);
+        }
+      );
+    }
+    localStorage.setItem('user', JSON.stringify(user));
+  }
+
+  isFavoriteMovie(movie: any): boolean {
+    let user = JSON.parse(localStorage.getItem('user') || '');
+    return user.favoriteMovies.includes(movie._id);
+  }
+
+  fav: string = 'favorite';
+  notFav: string = 'favorite_border';
 }
