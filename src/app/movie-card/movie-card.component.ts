@@ -33,8 +33,12 @@ export class MovieCardComponent implements OnInit {
   }
 
   getDirector(movie: any): void {
+    let age = 2024 - Number(movie.director.birth.slice(0, 4));
+    let heading = `${movie.director.name} (${movie.director.birth.slice(0, 4)}${
+      movie.director.death ? ' - ' + movie.director.death.slice(0, 4) : ', alive at ' + age + ' years old'
+    })`;
     this.dialog.open(InfoModalComponent, {
-      data: { title: movie.director.name, body: movie.director.bio },
+      data: { title: heading, body: movie.director.bio },
       width: '450px',
     });
   }
