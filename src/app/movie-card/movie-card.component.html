@@ -1,13 +1,13 @@
 <!-- src/app/movie-card/movie-card.component.html -->
-<div style="display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); padding: 5ch 5ch;">
+<div style="box-sizing: border-box; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); padding: 5ch 5ch;">
    @for(movie of movies; track movie.id; let idx=$index ) {
-    <mat-card style="flex: 1 1 auto; padding: 5px 5px; align-items: center;" appearance="raised" >
+    <mat-card style="flex: 1 1; padding: 5px 5px; align-items: center; min-width: fit-content;" appearance="raised" >
         <mat-card-title-group style="display: block;">
         <mat-card-title style="text-align: center;">@if(movie.title[21]){ {{ movie.title.slice(0,20).concat('...') | uppercase}} } @else{ {{ movie.title | uppercase }} }</mat-card-title>
         <mat-card-subtitle>{{movie.genre.name | uppercase}}</mat-card-subtitle>
         </mat-card-title-group>
         <img mat-card-image src="{{movie.imagePath}}" alt="{{movie.title}}" loading="lazy"/>
-        <mat-card-actions>
+        <mat-card-actions mat-ripple [matRippleRadius]="45" [matRippleUnbounded]="true" style="gap: 2px;">
             <button
                 mat-raised-button
                 color="primary"
@@ -29,12 +29,15 @@
             >
                 Synopsis
             </button>
-            <mat-icon (click)="toggleFavoriteMovie(movie)">@if(isFavoriteMovie(movie)){ {{fav}} } @else{ {{notFav}} }</mat-icon>
+            <mat-icon style="cursor: pointer; color: red;" (click)="toggleFavoriteMovie(movie)">@if(isFavoriteMovie(movie)){ {{fav}} } @else{ {{notFav}} }</mat-icon>
         </mat-card-actions>
     </mat-card>}
     @empty {
-        <div style="width: 80vw; height: 80svh; margin: auto;">
-        <h1 class="loading">Movies are still loading. Thank you for your patience.</h1>
+        <div class="loading">
+            <mat-progress-bar mode="buffer"></mat-progress-bar>
+
+        <h1 class="loading_message">Movies are still loading. <b>Thank you</b> for your patience.</h1>
+           <mat-progress-bar mode="buffer"></mat-progress-bar>
         </div>
         }
 </div>

@@ -59,11 +59,10 @@ export class MovieCardComponent implements OnInit {
     if (this.isFavoriteMovie(movie)) {
       this.fetchApiData.deleteFavoriteMovies(movie).subscribe(
         (res) => {
-          console.log('del success');
           console.log(res);
           user = res;
           localStorage.setItem('user', JSON.stringify(user));
-          this.snackBar.open('Movie has been deleted from your favorites!', 'OK', {
+          this.snackBar.open(`${movie.title} has been deleted from your favorites!`, 'OK', {
             duration: 3000,
           });
         },
@@ -74,11 +73,10 @@ export class MovieCardComponent implements OnInit {
     } else {
       this.fetchApiData.addFavoriteMovies(movie).subscribe(
         (res) => {
-          console.log('add success');
           console.log(res);
           user = res;
           localStorage.setItem('user', JSON.stringify(user));
-          this.snackBar.open('Movie has been added to your favorites!', 'OK', {
+          this.snackBar.open(`${movie.title} has been added to your favorites!`, 'OK', {
             duration: 3000,
           });
         },
