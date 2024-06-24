@@ -15,7 +15,8 @@ import { InfoModalComponent } from '../info-modal/info-modal.component';
 export class ProfileViewComponent implements OnInit {
   user: any = JSON.parse(localStorage.getItem('user') || '');
   movies: any[] = [];
-  favoriteMovies: any[] = this.user.favoriteMovies;
+  favoriteMovies: any[] = [];
+  movie: any = {};
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -34,7 +35,6 @@ export class ProfileViewComponent implements OnInit {
     this.fetchApiData.getUser(user).subscribe((resp: any) => {
       this.user = resp;
       this.movies = this.user.favoriteMovies;
-      console.log(this.user);
       return this.user;
     });
   }
@@ -60,15 +60,17 @@ export class ProfileViewComponent implements OnInit {
   }
 
   deleteUser(): void {
-    this.fetchApiData.deleteUser(this.user).subscribe((result) => {
-      console.log(result);
+    if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
       this.router.navigate(['welcome']).then(() => {
         localStorage.clear();
         this.snackBar.open('User successfully deleted.', 'OK', {
           duration: 2000,
         });
       });
-    });
+      this.fetchApiData.deleteUser().subscribe((result: void) => {
+        console.log(result);
+      });
+    }
   }
 
   getGenre(movie: any): void {
@@ -98,14 +100,14 @@ export class ProfileViewComponent implements OnInit {
   }
 
   toggleFavoriteMovie(movie: any): void {
-    let user: {} = JSON.parse(localStorage.getItem('user') || '');
+    this.user = JSON.parse(localStorage.getItem('user') || '');
 
     if (this.isFavoriteMovie(movie)) {
       this.fetchApiData.deleteFavoriteMovies(movie).subscribe(
         (res) => {
           console.log(res);
-          user = res;
-          localStorage.setItem('user', JSON.stringify(user));
+          this.user = res;
+          localStorage.setItem('user', JSON.stringify(this.user));
           this.snackBar.open(`${movie.title} has been deleted from your favorites!`, 'OK', {
             duration: 3000,
           });
@@ -118,8 +120,8 @@ export class ProfileViewComponent implements OnInit {
       this.fetchApiData.addFavoriteMovies(movie).subscribe(
         (res) => {
           console.log(res);
-          user = res;
-          localStorage.setItem('user', JSON.stringify(user));
+          this.user = res;
+          localStorage.setItem('user', JSON.stringify(this.user));
           this.snackBar.open(`${movie.title} has been added to your favorites!`, 'OK', {
             duration: 3000,
           });
@@ -129,7 +131,7 @@ export class ProfileViewComponent implements OnInit {
         }
       );
     }
-    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('user', JSON.stringify(this.user));
   }
 
   isFavoriteMovie(movie: any): boolean {

@@ -13,6 +13,7 @@ import { InfoModalComponent } from '../info-modal/info-modal.component';
 export class MovieCardComponent implements OnInit {
   @Input() filtered: boolean = true;
   movies: any[] = [];
+  movie: any = {};
   userData: any = {};
   user: any = {};
   favoriteMovies: any[] = [];
@@ -24,11 +25,9 @@ export class MovieCardComponent implements OnInit {
     this.getMovies();
   }
 
-  getMovies(): void {
-    const { favoriteMovies }: any = JSON.parse(localStorage.getItem('user') || '');
+  getMovies(): any {
     this.fetchApiData.getAllMovies().subscribe((resp: any[]) => {
       this.movies = resp;
-      console.log(favoriteMovies);
       return this.movies;
     });
   }

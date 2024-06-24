@@ -1,5 +1,5 @@
 <!-- src/app/movie-card/movie-card.component.html -->
-<div style="box-sizing: border-box; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); padding: 5ch 5ch;">
+<div class="movie-container">
    @for(movie of movies; track movie._id; let idx=$index ) {
     <mat-card style="flex: 1 1; padding: 5px 5px; align-items: center; min-width: fit-content;" appearance="raised" >
         <mat-card-title-group style="display: block;">

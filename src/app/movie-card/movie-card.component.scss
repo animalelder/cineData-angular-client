@@ -1,4 +1,10 @@
-@import url(https://fonts.googleapis.com/css?family=Comfortaa:400,700,300);
+.movie-container {
+  box-sizing: border-box;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  padding: 5ch 5ch;
+}
 
 img {
   max-width: 15rem;
@@ -39,7 +45,6 @@ svg {
 }
 h1 {
   display: block;
-  font-family: 'Comfortaa';
   text-align: center;
   color: #fff;
   font-size: 34px;

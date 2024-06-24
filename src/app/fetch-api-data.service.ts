@@ -153,14 +153,13 @@ export class FetchApiDataService {
   }
 
   // Delete user account
-  public deleteUser(userDetails: any): Observable<any> {
+  public deleteUser(): Observable<any> {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');
     return this.http
       .delete(apiUrl + 'users/' + user.username, {
         headers: new HttpHeaders({
           Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
         }),
       })
       .pipe(map(this.extractResponseData), catchError(this.handleError));

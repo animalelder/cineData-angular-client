@@ -5,7 +5,7 @@
           <mat-card class="user-card">
           <img mat-card-image width="300" height="300" src="https://placehold.co/300x300/pink/white?text=cineData+User">
           <mat-card-header class="profile-card-header">
-              <mat-card-title >{{user.username}}</mat-card-title>
+              <mat-card-title>Hello, {{user.username}}</mat-card-title>
           </mat-card-header>
           <mat-card-content>
               <p>Email: {{user.email}}</p>
@@ -23,7 +23,7 @@
         @for(movie of favoriteMovies; track movie._id; let idx=$index ) {
       <mat-card class="movie-card" appearance="raised" >
           <mat-card-title-group style="display: block;">
-          <mat-card-title style="text-align: center;">@if(movie.title[21]){ {{ movie.title.slice(0,20).concat('...') | uppercase}} } @else{ {{ movie.title | uppercase }} }</mat-card-title>
+          <mat-card-title class="movie-title" style="text-align: center;"> @if(movie.title[20]){ {{ movie.title.slice(0,19).concat('...') | uppercase}} } @else{ {{ movie.title | uppercase }} } </mat-card-title>
           <mat-card-subtitle style="margin-left: 10px;">{{movie.releaseDate}}</mat-card-subtitle>
           </mat-card-title-group>
           <img mat-card-image src="{{movie.imagePath}}" alt="{{movie.title}}" loading="lazy"/>
@@ -56,7 +56,7 @@
           <div class="loading">
               <mat-progress-bar mode="buffer"></mat-progress-bar>
 
-          <h1 class="loading_message">Movies are still loading. <b>Thank you</b> for your patience.</h1>
+          <h1 class="loading_message">You haven't added any favorite movies yet.</h1>
              <mat-progress-bar mode="buffer"></mat-progress-bar>
          </div>
           }

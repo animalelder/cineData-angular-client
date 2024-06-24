@@ -1,17 +1,22 @@
 .navbar {
   position: sticky;
+  display: flex;
   top: 0;
   left: 0;
   width: 100%;
   height: fit-content;
   padding: 10px 10px;
   z-index: 2;
+  gap: 5px;
 }
 .navbar span {
   flex: 1 1 auto;
 }
 
 .nav-icon-button {
-  margin-right: 35px;
-  transform: scale(1.7);
+  transform: scale(1.1);
+
+  &:hover {
+    transform: scale(1.4);
+  }
 }
