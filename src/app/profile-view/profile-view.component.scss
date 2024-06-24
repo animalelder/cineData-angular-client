@@ -2,10 +2,35 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
   margin-top: 2rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  gap: 1rem;
 }
 
+.orientation {
+  width: 75%;
+  justify-self: flex-start;
+  align-self: stretch;
+}
+
+.user-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px,
+    rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
+}
+
+.buttons {
+  justify-content: space-between;
+}
 img {
   max-width: 15rem;
   min-width: 10rem;
@@ -15,6 +40,21 @@ img {
     rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
 }
 
+.fav-movies {
+  box-sizing: border-box;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  padding: 5ch 5ch;
+}
+
+.movie-card {
+  flex: 1 1;
+  padding: 5px 5px;
+  align-items: center;
+  width: 300px;
+  height: auto;
+}
 mat-card::after {
   background-color: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(0.1px);
