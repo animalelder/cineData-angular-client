@@ -1,0 +1,40 @@
+.user-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+
+img {
+  max-width: 15rem;
+  min-width: 10rem;
+  height: auto;
+  object-fit: contain;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px,
+    rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
+}
+
+mat-card::after {
+  background-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(0.1px);
+}
+
+mat-card-title {
+  background-color: darken(#fff, 4);
+}
+
+h1 {
+  display: block;
+  font-family: 'Comfortaa';
+  text-align: center;
+  color: #fff;
+  font-size: 34px;
+  font-weight: 100;
+  text-transform: uppercase;
+  background-color: darken(#fce4ec, 5);
+  padding: 20px 0;
+  b {
+    font-weight: 800;
+  }
+}

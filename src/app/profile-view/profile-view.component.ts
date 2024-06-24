@@ -1,57 +1,75 @@
-// src/app/movie-card/movie-card.component.ts
-import { Component, OnInit, Input } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+// src/app/profile-view/profile-view.component.ts
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserUpdateFormComponent } from '../user-update-form/user-update-form.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { InfoModalComponent } from '../info-modal/info-modal.component';
 
 @Component({
-  selector: 'app-movie-card',
-  templateUrl: './movie-card.component.html',
-  styleUrls: ['./movie-card.component.scss'],
+  selector: 'app-profile-view',
+  templateUrl: './profile-view.component.html',
+  styleUrl: './profile-view.component.scss',
 })
-export class MovieCardComponent implements OnInit {
-  @Input() filtered: boolean = true;
+export class ProfileViewComponent implements OnInit {
+  user: any = JSON.parse(localStorage.getItem('user') || '');
   movies: any[] = [];
-  userData: any = {};
-  user: any = {};
-  favoriteMovies: any[] = [];
-  favMovies: any[] = [];
+  favoriteMovies: any[] = this.user.favoriteMovies;
 
-  constructor(public fetchApiData: FetchApiDataService, public dialog: MatDialog, public snackBar: MatSnackBar) {}
+  constructor(
+    public fetchApiData: FetchApiDataService,
+    public dialog: MatDialog,
+    public snackBar: MatSnackBar,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.getMovies();
-  }
-
-  getMovies(): void {
-    const { favoriteMovies }: any = JSON.parse(localStorage.getItem('user') || '');
-    this.fetchApiData.getAllMovies().subscribe((resp: any[]) => {
-      this.movies = resp;
-      console.log(favoriteMovies);
-      return this.movies;
-    });
+    this.getUser();
+    this.getfavoriteMovies();
   }
 
   getUser(): void {
-    let user: any = JSON.parse(localStorage.getItem('user') || '');
+    let user: {} = JSON.parse(localStorage.getItem('user') || '');
     this.fetchApiData.getUser(user).subscribe((resp: any) => {
       this.user = resp;
       this.movies = this.user.favoriteMovies;
       console.log(this.user);
-      this.favoriteMovies = user.favoriteMovies;
       return this.user;
     });
   }
 
-  // getFavMovies(): void {
-  //   this.getUser();
-  //   this.fetchApiData.getAllMovies().subscribe((resp: any[]) => {
-  //     this.movies = resp;
-  //     console.log(this.favoriteMovies);
-  //     const favMovies = this.movies.filter((movie) => this.favoriteMovies.includes(movie._id));
-  //   });
-  // }
+  getfavoriteMovies(): void {
+    this.fetchApiData.getAllMovies().subscribe(
+      (res: any) => {
+        this.favoriteMovies = res.filter((movie: any) => {
+          return this.user.favoriteMovies.includes(movie._id);
+        });
+      },
+      (err: any) => {
+        console.error(err);
+      }
+    );
+  }
+
+  openUpdateUserDialog(): void {
+    this.dialog.open(UserUpdateFormComponent, {
+      data: { username: this.user.username, password: '', email: this.user.email, birthdate: this.user.birthdate },
+      width: '280px',
+    });
+  }
+
+  deleteUser(): void {
+    this.fetchApiData.deleteUser(this.user).subscribe((result) => {
+      console.log(result);
+      this.router.navigate(['welcome']).then(() => {
+        localStorage.clear();
+        this.snackBar.open('User successfully deleted.', 'OK', {
+          duration: 2000,
+        });
+      });
+    });
+  }
 
   getGenre(movie: any): void {
     this.dialog.open(InfoModalComponent, {

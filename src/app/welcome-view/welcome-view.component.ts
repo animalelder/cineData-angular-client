@@ -1,3 +1,4 @@
+// src/app/welcome-view/welcome-view.component.ts
 import { Component, OnInit } from '@angular/core';
 import { UserLoginFormComponent } from '../user-login-form/user-login-form.component';
 import { UserRegistrationFormComponent } from '../user-registration-form/user-registration-form.component';

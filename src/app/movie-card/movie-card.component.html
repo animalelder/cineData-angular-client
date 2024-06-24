@@ -1,10 +1,10 @@
 <!-- src/app/movie-card/movie-card.component.html -->
 <div style="box-sizing: border-box; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); padding: 5ch 5ch;">
-   @for(movie of movies; track movie.id; let idx=$index ) {
+   @for(movie of movies; track movie._id; let idx=$index ) {
     <mat-card style="flex: 1 1; padding: 5px 5px; align-items: center; min-width: fit-content;" appearance="raised" >
         <mat-card-title-group style="display: block;">
         <mat-card-title style="text-align: center;">@if(movie.title[21]){ {{ movie.title.slice(0,20).concat('...') | uppercase}} } @else{ {{ movie.title | uppercase }} }</mat-card-title>
-        <mat-card-subtitle>{{movie.genre.name | uppercase}}</mat-card-subtitle>
+        <mat-card-subtitle>{{movie.releaseDate}}</mat-card-subtitle>
         </mat-card-title-group>
         <img mat-card-image src="{{movie.imagePath}}" alt="{{movie.title}}" loading="lazy"/>
         <mat-card-actions mat-ripple [matRippleRadius]="45" [matRippleUnbounded]="true" style="gap: 2px;">
