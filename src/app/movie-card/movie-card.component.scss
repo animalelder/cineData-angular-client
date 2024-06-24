@@ -1,14 +1,22 @@
 .movie-container {
-  box-sizing: border-box;
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
-  padding: 5ch 5ch;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  padding: 25px 15px;
+}
+
+.movie-card {
+  display: flex;
+  flex: 1 1;
+  padding: 5px 5px;
+  align-items: center;
+  min-width: fit-content;
+  margin: 0 auto;
 }
 
 img {
   max-width: 15rem;
-  min-width: 10rem;
+  min-width: 8rem;
   height: auto;
   object-fit: contain;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px,

@@ -3,13 +3,13 @@
  <div class="user-info">
   <mat-card class="orientation"><mat-card-header><mat-card-title>Welcome to Your Profile Page!</mat-card-title></mat-card-header><mat-card-content></mat-card-content></mat-card>
           <mat-card class="user-card">
-          <img mat-card-image width="300" height="300" src="https://placehold.co/300x300/pink/white?text=cineData+User">
-          <mat-card-header class="profile-card-header">
-              <mat-card-title>Hello, {{user.username}}</mat-card-title>
-          </mat-card-header>
+          <img mat-card-image width="300" height="300" src="https://placehold.co/300x300/pink/white?text={{user.username | uppercase }}">
+          <!-- <mat-card-header class="profile-card-header">
+              <mat-card-title>Hello, {{user.username | titlecase }}!</mat-card-title>
+          </mat-card-header> -->
           <mat-card-content>
-              <p>Email: {{user.email}}</p>
-              <p>Birthday: {{user.birthdate | date: 'longDate' }}</p>
+              <p><b>Email:</b></p> <p> {{user.email}}</p>
+              <p><b>Birthday:</b></p> <p>{{user.birthdate | date: 'longDate' }}</p>
           </mat-card-content>
           <mat-card-actions class="buttons">
               <button mat-raised-button color="primary" (click)="openUpdateUserDialog()">Update</button>

@@ -84,7 +84,6 @@ export class MovieCardComponent implements OnInit {
     if (this.isFavoriteMovie(movie)) {
       this.fetchApiData.deleteFavoriteMovies(movie).subscribe(
         (res) => {
-          console.log(res);
           user = res;
           localStorage.setItem('user', JSON.stringify(user));
           this.snackBar.open(`${movie.title} has been deleted from your favorites!`, 'OK', {
@@ -98,7 +97,6 @@ export class MovieCardComponent implements OnInit {
     } else {
       this.fetchApiData.addFavoriteMovies(movie).subscribe(
         (res) => {
-          console.log(res);
           user = res;
           localStorage.setItem('user', JSON.stringify(user));
           this.snackBar.open(`${movie.title} has been added to your favorites!`, 'OK', {
