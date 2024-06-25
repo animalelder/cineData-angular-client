@@ -11,7 +11,6 @@ import { InfoModalComponent } from '../info-modal/info-modal.component';
   styleUrls: ['./movie-card.component.scss'],
 })
 export class MovieCardComponent implements OnInit {
-  @Input() filtered: boolean = true;
   movies: any[] = [];
   movie: any = {};
   userData: any = {};
@@ -42,15 +41,6 @@ export class MovieCardComponent implements OnInit {
       return this.user;
     });
   }
-
-  // getFavMovies(): void {
-  //   this.getUser();
-  //   this.fetchApiData.getAllMovies().subscribe((resp: any[]) => {
-  //     this.movies = resp;
-  //     console.log(this.favoriteMovies);
-  //     const favMovies = this.movies.filter((movie) => this.favoriteMovies.includes(movie._id));
-  //   });
-  // }
 
   getGenre(movie: any): void {
     this.dialog.open(InfoModalComponent, {
