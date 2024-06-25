@@ -1,5 +1,6 @@
 .user-info {
   display: flex;
+  flex-flow: row wrap;
   justify-content: center;
   align-items: center;
   flex-direction: row;
@@ -7,6 +8,7 @@
   margin-left: 0.5rem;
   margin-right: 0.5rem;
   gap: 1rem;
+  padding: 0 8px;
 }
 
 .buttons {
@@ -14,7 +16,8 @@
 }
 
 .orientation {
-  width: 75%;
+  flex: 1 1 auto;
+  max-width: 75%;
   justify-self: flex-start;
   align-self: stretch;
 }
@@ -39,7 +42,7 @@
 .buttons {
   justify-content: space-between;
 }
-img {
+.movie-card img {
   max-width: 15rem;
   min-width: 10rem;
   height: auto;

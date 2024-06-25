@@ -1,7 +1,20 @@
 <!-- src/app/profile-view/profile-view.component.html -->
 
  <div class="user-info">
-  <mat-card class="orientation"><mat-card-header><mat-card-title>Welcome to Your Profile Page!</mat-card-title></mat-card-header><mat-card-content></mat-card-content></mat-card>
+  <mat-card class="orientation">
+    <mat-card-header>
+    <mat-card-title>Profile Page and Basic Orientation</mat-card-title>
+    </mat-card-header>
+  <mat-card-content>
+    <p>Hello, {{user.username | titlecase }}!</p>
+    <p>Welcome to CineDataDB...an app for learning about the best films.</p>
+    <p>On the main page, click the heart to add a movie to your favorites.</p>
+    <p>Here you can view and update your information. Or delete your account.</p>
+    <p>Click on the "Update" button to change your username, password, email, or birthdate.</p>
+    <p>Click on the "Delete" button to remove your account from the database.</p>
+    <p>Scroll down to see your set of favorite films!</p>
+  </mat-card-content>
+  </mat-card>
           <mat-card class="user-card">
           <img mat-card-image width="300" height="300" src="https://placehold.co/300x300/pink/white?text={{user.username | uppercase }}">
           <!-- <mat-card-header class="profile-card-header">
@@ -54,10 +67,8 @@
       </mat-card>}
       @empty {
           <div class="loading">
-              <mat-progress-bar mode="buffer"></mat-progress-bar>
-
           <h1 class="loading_message">You haven't added any favorite movies yet.</h1>
-             <mat-progress-bar mode="buffer"></mat-progress-bar>
+
          </div>
           }
   </div>
