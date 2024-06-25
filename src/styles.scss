@@ -38,7 +38,8 @@ html {
 
 html,
 body {
-  background-color: #fce4ec;
+  background: linear-gradient(to bottom right, #c84e89, #fce4ec);
+  background-attachment: fixed;
   height: 100%;
 }
 body {

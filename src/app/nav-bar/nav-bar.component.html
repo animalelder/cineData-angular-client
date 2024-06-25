@@ -1,8 +1,8 @@
 <!-- src/app/nav-bar/nav-bar.component.html -->
-<mat-toolbar class="navbar" color="primary">
+<mat-toolbar class="navbar mat-elevation-z3" color="primary">
     <button mat-raised-button  (click)="openMovies">cineDataDB</button>
     <span class="spacer"></span>
-    <button mat-raised-button (click)="openMovies()"><mat-icon class="nav-icon-button">local_movies</mat-icon></button>
-    <button mat-raised-button  (click)="openProfile()"><mat-icon class="nav-icon-button">person_outline</mat-icon></button>
-    <button mat-raised-button  (click)="logOut()"><mat-icon class="nav-icon-button">logout</mat-icon></button>
+    <button mat-raised-button class="mat-elevation-z8" (click)="openMovies()"><mat-icon class="nav-icon-button">local_movies</mat-icon></button>
+    <button mat-raised-button  class="mat-elevation-z8" (click)="openProfile()"><mat-icon class="nav-icon-button">person_outline</mat-icon></button>
+    <button mat-raised-button class="mat-elevation-z8"  (click)="logOut()"><mat-icon class="nav-icon-button ">logout</mat-icon></button>
 </mat-toolbar>
