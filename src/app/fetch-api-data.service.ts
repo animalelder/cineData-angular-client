@@ -32,7 +32,7 @@ export class FetchApiDataService {
    * @param {Object} userDetails Login details
    * @returns
    */
-  public userLogin(userDetails: any): Observable<any> {
+  public userLogin(userDetails: any): Observable<any | Error> {
     console.log(userDetails);
     return this.http
       .post(apiUrl + `login?Username=${userDetails.username}&Password=${userDetails.password}`, userDetails)
@@ -212,12 +212,18 @@ export class FetchApiDataService {
   }
 
   /** All public methods use this to handle errors */
-  private handleError(error: HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
-      console.error('Some error occurred:', error.error.message);
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 0) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error);
+    } else if (error.status.toString().startsWith('4')) {
+      console.error('User does not exist.');
     } else {
-      console.error(`Error Status code ${error.status}, ` + `Error body is: ${error.error}`);
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong.
+      console.error(`Backend returned code ${error.status}, body was: `, error.error);
     }
-    throwError(() => new Error('Something bad happened; please try again later.'));
+    // Return an observable with a user-facing error message.
+    return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 }

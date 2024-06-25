@@ -40,8 +40,7 @@ export class UserLoginFormComponent {
         this.router.navigate(['movies']);
       },
       (result) => {
-        console.log(result);
-        this.snackBar.open(result, 'OK', {
+        this.snackBar.open('Login failed. No such user with password.', 'OK', {
           duration: 2000,
         });
       }

@@ -7,7 +7,7 @@
         <mat-card-title style="text-align: center;">@if(movie.title[21]){ {{ movie.title.slice(0,20).concat('...') | uppercase}} } @else{ {{ movie.title | uppercase }} }</mat-card-title>
         <mat-card-subtitle>{{movie.releaseDate}}</mat-card-subtitle>
         </mat-card-title-group>
-        <img mat-card-image src="{{movie.imagePath}}" alt="{{movie.title}}" loading="lazy"/>
+        <img mat-card-image src="{{movie.imagePath}}" alt="{{movie.title}}" loading="lazy" />
         <mat-card-actions mat-ripple [matRippleRadius]="45" [matRippleUnbounded]="true" style="gap: 2px;">
             <button
                 mat-raised-button
