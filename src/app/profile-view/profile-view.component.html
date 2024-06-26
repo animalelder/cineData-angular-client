@@ -3,7 +3,7 @@
  <div class="user-info">
   <mat-card appearance="raised" class="orientation mat-elevation-z3">
     <mat-card-header>
-    <mat-card-title>Profile Page and Basic Orientation</mat-card-title>
+      <mat-card-title>Profile Page and Basic Orientation</mat-card-title>
     </mat-card-header>
   <mat-card-content>
     <p>Hello, {{user.username | titlecase }}!</p>
@@ -15,20 +15,19 @@
     <p>Scroll down to see your set of favorite films!</p>
   </mat-card-content>
   </mat-card>
-          <mat-card appearance="raised" class="user-card mat-elevation-z5">
-          <img mat-card-image width="300" height="300" src="https://placehold.co/300x300/pink/white?text={{user.username | uppercase }}">
-          <!-- <mat-card-header class="profile-card-header">
-              <mat-card-title>Hello, {{user.username | titlecase }}!</mat-card-title>
-          </mat-card-header> -->
-          <mat-card-content>
-              <p><b>Email:</b></p> <p> {{user.email}}</p>
-              <p><b>Birthday:</b></p> <p>{{user.birthdate | date: 'longDate' }}</p>
-          </mat-card-content>
-          <mat-card-actions class="buttons">
-              <button mat-raised-button color="primary" (click)="openUpdateUserDialog()">Update</button>
-              <button mat-raised-button color="warn" (click)="deleteUser()">Delete</button>
-          </mat-card-actions>
-      </mat-card>
+<mat-card appearance="raised" class="user-card mat-elevation-z5">
+  <img mat-card-image width="300" height="300" src="https://placehold.co/300x300/pink/white?text={{user.username | uppercase }}">
+  <mat-card-content>
+    <p><b>Email:</b></p>
+    <p> {{user.email}}</p>
+    <p><b>Birthday:</b></p>
+    <p>{{user.birthdate | date: 'longDate' }}</p>
+  </mat-card-content>
+  <mat-card-actions class="buttons">
+    <button mat-raised-button color="primary" (click)="openUpdateUserDialog()">Update</button>
+    <button mat-raised-button color="warn" (click)="deleteUser()">Delete</button>
+  </mat-card-actions>
+</mat-card>
 
  </div>
   <h1>Here are your Favorite Movies</h1>

@@ -45,7 +45,7 @@
             matInput
             [(ngModel)]="userData.birthdate"
             type="date"
-            placeholder="Birthdate" 
+            placeholder="Birthdate"
             name="Birthdate"
           >
                   <mat-icon matSuffix>calendar_month</mat-icon>
@@ -55,6 +55,8 @@
     <mat-card-actions>
         <button
           mat-raised-button
+          [disabled]="loading"
+          [class.spinner]="loading"
           (click)="registerUser()"
           color="primary"
         >

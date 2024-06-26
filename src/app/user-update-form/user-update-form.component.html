@@ -9,7 +9,7 @@
           <input
             matInput
             [(ngModel)]="userData.username"
-            placeholder="Username"
+            [placeholder]="data.username"
             type="text"
             name="Username"
             required
@@ -21,7 +21,8 @@
             matInput
             [(ngModel)]="userData.password"
            [type]="hide ? 'password' : 'text'"
-            placeholder="Password"
+            [placeholder]="data.password"
+
             name="Password"
             required
           >
@@ -34,7 +35,7 @@
             matInput
             [(ngModel)]="userData.email"
             type = "email"
-            placeholder="Email"
+            [placeholder]="data.email"
             name="Email"
             required
           >
@@ -45,7 +46,8 @@
             matInput
             [(ngModel)]="userData.birthdate"
             type="date"
-            placeholder="Birthdate" 
+            id="birthdate"
+            placeholder="Birthdate"
             name="Birthdate"
           >
                   <mat-icon matSuffix>calendar_month</mat-icon>
@@ -55,6 +57,8 @@
     <mat-card-actions>
         <button
           mat-raised-button
+          [disabled]="loading"
+          [class.spinner]="loading"
           (click)="updateUser()"
           color="primary"
         >

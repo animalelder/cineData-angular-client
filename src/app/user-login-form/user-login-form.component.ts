@@ -9,7 +9,7 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 
 // This import is used to display notifications back to the user
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { timer } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -19,6 +19,7 @@ import { Router } from '@angular/router';
 })
 export class UserLoginFormComponent {
   @Input() userData = { username: '', password: '' };
+  loading = false;
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -28,18 +29,21 @@ export class UserLoginFormComponent {
   ) {}
 
   loginUser(): void {
+    this.loading = true;
     this.fetchApiData.userLogin(this.userData).subscribe(
       (result) => {
         this.dialogRef.close();
         this.snackBar.open('User logged in successfully!', 'OK', {
           duration: 2000,
         });
+        this.loading = false;
         console.log(result);
         localStorage.setItem('user', JSON.stringify(result.user));
         localStorage.setItem('token', result.token);
         this.router.navigate(['movies']);
       },
       (result) => {
+        this.loading = false;
         this.snackBar.open('Login failed. No such user with password.', 'OK', {
           duration: 2000,
         });

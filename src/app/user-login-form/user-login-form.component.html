@@ -34,10 +34,12 @@
   <mat-card-actions>
       <button
         mat-raised-button
+        [disabled]="loading"
+        [class.spinner]="loading"
         (click)="loginUser()"
         color="primary"
       >
         Log In
       </button>
   </mat-card-actions>
-  </mat-card>   
+  </mat-card>

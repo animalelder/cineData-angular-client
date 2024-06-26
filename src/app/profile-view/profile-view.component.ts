@@ -1,5 +1,5 @@
 // src/app/profile-view/profile-view.component.ts
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserUpdateFormComponent } from '../user-update-form/user-update-form.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -11,9 +11,11 @@ import { InfoModalComponent } from '../info-modal/info-modal.component';
   selector: 'app-profile-view',
   templateUrl: './profile-view.component.html',
   styleUrl: './profile-view.component.scss',
+  inputs: ['user'],
 })
 export class ProfileViewComponent implements OnInit {
-  user: any = JSON.parse(localStorage.getItem('user') || '');
+  @Input() updatedUser: any;
+  @Input() user: any = JSON.parse(localStorage.getItem('user') || '');
   movies: any[] = [];
   favoriteMovies: any[] = [];
   movie: any = {};
@@ -31,10 +33,11 @@ export class ProfileViewComponent implements OnInit {
   }
 
   getUser(): void {
-    let user: {} = JSON.parse(localStorage.getItem('user') || '');
-    this.fetchApiData.getUser(user).subscribe((resp: any) => {
+    let localUser: {} = JSON.parse(localStorage.getItem('user') || '');
+    this.fetchApiData.getUser(localUser).subscribe((resp: any) => {
       this.user = resp;
       this.movies = this.user.favoriteMovies;
+      console.log(this.user);
       return this.user;
     });
   }
@@ -54,7 +57,12 @@ export class ProfileViewComponent implements OnInit {
 
   openUpdateUserDialog(): void {
     this.dialog.open(UserUpdateFormComponent, {
-      data: { username: this.user.username, password: '', email: this.user.email, birthdate: this.user.birthdate },
+      data: {
+        username: this.user.username,
+        password: '',
+        email: this.user.email,
+        birthdate: this.user.birthdate,
+      },
       width: '280px',
     });
   }
