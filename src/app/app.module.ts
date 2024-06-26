@@ -4,7 +4,6 @@ import { NgOptimizedImage } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
-import { AsyncPipe } from '@angular/common';
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatIconModule } from '@angular/material/icon';
@@ -59,7 +58,6 @@ const appRoutes: Routes = [
     FormsModule,
     BrowserAnimationsModule,
     DatePipe,
-    AsyncPipe,
     MatToolbarModule,
     MatIconModule,
     MatDatepickerModule,

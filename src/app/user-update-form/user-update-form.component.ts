@@ -3,7 +3,6 @@ import { Component, OnInit, Input, Inject, Output } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FetchApiDataService } from '../fetch-api-data.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-update-form',
@@ -29,8 +28,7 @@ export class UserUpdateFormComponent implements OnInit {
     },
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserUpdateFormComponent>,
-    public snackBar: MatSnackBar,
-    public router: Router
+    public snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {}
@@ -46,7 +44,6 @@ export class UserUpdateFormComponent implements OnInit {
         this.dialogRef.close();
         console.log(result);
         localStorage.setItem('user', JSON.stringify(result));
-        this.router.navigate(['profile']);
       },
       (result) => {
         this.loading = false;

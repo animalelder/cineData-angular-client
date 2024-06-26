@@ -65,6 +65,10 @@ export class ProfileViewComponent implements OnInit {
       },
       width: '280px',
     });
+
+    this.dialog.afterAllClosed.subscribe(() => {
+      this.user = JSON.parse(localStorage.getItem('user') || '');
+    });
   }
 
   deleteUser(): void {
