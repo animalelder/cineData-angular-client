@@ -59,7 +59,7 @@ svg {
   width: 100px;
   height: 100px;
 }
-h1 {
+.loading_message {
   display: block;
   text-align: center;
   color: #fff;
@@ -71,4 +71,10 @@ h1 {
   b {
     font-weight: 800;
   }
+}
+
+.no_fav_message {
+  color: #fff;
+  font-size: 34px;
+  font-weight: 100;
 }

@@ -11,6 +11,8 @@ import { InfoModalComponent } from '../info-modal/info-modal.component';
   styleUrls: ['./movie-card.component.scss'],
 })
 export class MovieCardComponent implements OnInit {
+  @Input() filteredFaves: boolean = false;
+
   movies: any[] = [];
   movie: any = {};
   userData: any = {};
@@ -21,12 +23,21 @@ export class MovieCardComponent implements OnInit {
   constructor(public fetchApiData: FetchApiDataService, public dialog: MatDialog, public snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
+    this.getUser();
     this.getMovies();
   }
 
   getMovies(): any {
     this.fetchApiData.getAllMovies().subscribe((resp: any[]) => {
       this.movies = resp;
+      this.movies.forEach((movie) => {
+        if (movie.title.length > 21) {
+          movie.title = movie.title.slice(0, 21) + '...';
+        }
+      });
+      if (this.filteredFaves) {
+        this.movies = this.movies.filter((movie) => this.favoriteMovies.includes(movie._id));
+      }
       return this.movies;
     });
   }

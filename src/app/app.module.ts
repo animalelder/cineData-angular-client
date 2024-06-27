@@ -4,6 +4,8 @@ import { NgOptimizedImage } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
+import { LOCALE_ID } from '@angular/core';
+import { DATE_PIPE_DEFAULT_OPTIONS } from '@angular/common';
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatIconModule } from '@angular/material/icon';
@@ -57,6 +59,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
+    MatIconModule,
     DatePipe,
     MatToolbarModule,
     MatIconModule,
@@ -71,7 +74,11 @@ const appRoutes: Routes = [
     MatDialogModule,
     MatSnackBarModule,
   ],
-  providers: [provideAnimationsAsync()],
+  providers: [
+    provideAnimationsAsync(),
+    { provide: LOCALE_ID, useValue: 'en-US' },
+    { provide: DATE_PIPE_DEFAULT_OPTIONS, useValue: { timezone: '+0600' } },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

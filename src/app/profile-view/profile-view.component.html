@@ -31,43 +31,4 @@
 
  </div>
   <h1>Here are your Favorite Movies</h1>
-  <div class="fav-movies">
-        @for(movie of favoriteMovies; track movie._id; let idx=$index ) {
-      <mat-card class="movie-card mat-elevation-z8" appearance="raised" >
-          <mat-card-title-group style="display: block;">
-          <mat-card-title class="movie-title" style="text-align: center;"> @if(movie.title[20]){ {{ movie.title.slice(0,19).concat('...') | uppercase}} } @else{ {{ movie.title | uppercase }} } </mat-card-title>
-          <mat-card-subtitle style="margin-left: 10px;">{{movie.releaseDate}}</mat-card-subtitle>
-          </mat-card-title-group>
-          <img mat-card-image src="{{movie.imagePath}}" alt="{{movie.title}}" loading="lazy"/>
-          <mat-card-actions mat-ripple [matRippleRadius]="45" [matRippleUnbounded]="true" style="gap: 2px;">
-              <button
-                  mat-raised-button
-                  color="primary"
-                  (click)="getGenre(movie)"
-              >
-                  Genre
-              </button>
-              <button
-                  mat-raised-button
-                  color="primary"
-                  (click)="getDirector(movie)"
-              >
-                  Director
-              </button>
-              <button
-                  mat-raised-button
-                  color="primary"
-                  (click)="getSynopsis(movie)"
-              >
-                  Synopsis
-              </button>
-              <mat-icon style="cursor: pointer; color: red;" (click)="toggleFavoriteMovie(movie)">@if(isFavoriteMovie(movie)){ {{fav}} } @else{ {{notFav}} }</mat-icon>
-          </mat-card-actions>
-      </mat-card>}
-      @empty {
-          <div class="loading">
-          <h1 class="loading_message">You haven't added any favorite movies yet.</h1>
-
-         </div>
-          }
-  </div>
+ <app-movie-card [filteredFaves]="true"></app-movie-card>
