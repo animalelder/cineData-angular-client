@@ -4,6 +4,11 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FetchApiDataService } from '../fetch-api-data.service';
 
+/**
+ * UserUpdateFormComponent
+ * @class
+ * @classdesc This component provides the user update form
+ */
 @Component({
   selector: 'app-user-update-form',
   templateUrl: './user-update-form.component.html',
@@ -18,6 +23,14 @@ export class UserUpdateFormComponent implements OnInit {
   };
   loading = false;
 
+  /**
+   * @description The constructor of `UserUpdateFormComponent`
+   * @constructor
+   * @param {MAT_DIALOG_DATA} data - Injects data passed to the dialog
+   * @param {FetchApiDataService} fetchApiData - Injects service to fetch API data
+   * @param {MatDialogRef} dialogRef - Injects service to open Material Design dialogs
+   * @param {MatSnackBar} snackBar - Injects service to display notifications back to the user
+   */
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: {
@@ -33,6 +46,9 @@ export class UserUpdateFormComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  /**
+   * @method updateUser - Sends the updated user data to the backend
+   */
   updateUser(): void {
     this.loading = true;
     this.fetchApiData.editUser(this.userData).subscribe(

@@ -6,6 +6,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { FetchApiDataService } from '../fetch-api-data.service';
 
+/**
+ * ProfileViewComponent
+ * @class
+ * @classdesc This component provides the profile view
+ */
 @Component({
   selector: 'app-profile-view',
   templateUrl: './profile-view.component.html',
@@ -16,17 +21,31 @@ export class ProfileViewComponent implements OnInit {
   @Input() updatedUser: any;
   @Input() user: any = JSON.parse(localStorage.getItem('user') || '');
 
+  /**
+   * @description The constructor of `ProfileViewComponent`
+   * @constructor
+   * @param {FetchApiDataService} fetchApiData - Injects service to fetch API data
+   * @param {MatDialog} dialog - Injects service to open Material Design dialogs
+   * @param {MatSnackBar} snackBar - Injects service to display notifications back to the user
+   * @param {Router} router - Injects the Angular router
+   */
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
     private router: Router
   ) {}
-
+  /**
+   * @method ngOnInit automatically get user data on initialization
+   */
   ngOnInit(): void {
     this.getUser();
   }
 
+  /**
+   * @method getUser - Gets the user data from the backend
+   * After the user data is fetched, it is stored in the user variable
+   */
   getUser(): void {
     let localUser: {} = JSON.parse(localStorage.getItem('user') || '');
     this.fetchApiData.getUser(localUser).subscribe((resp: any) => {
@@ -36,6 +55,10 @@ export class ProfileViewComponent implements OnInit {
     });
   }
 
+  /**
+   * @method openUpdateUserDialog - Opens the user update dialog
+   * After the dialog is closed, the user data is updated
+   */
   openUpdateUserDialog(): void {
     this.dialog.open(UserUpdateFormComponent, {
       data: {
@@ -52,6 +75,10 @@ export class ProfileViewComponent implements OnInit {
     });
   }
 
+  /**
+   * @method deleteUser - Deletes the user account
+   * After the user is deleted, the user is logged out and the welcome view is displayed
+   */
   deleteUser(): void {
     if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
       this.router.navigate(['welcome']).then(() => {

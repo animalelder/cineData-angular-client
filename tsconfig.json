@@ -21,6 +21,11 @@
     "useDefineForClassFields": false,
     "lib": ["ES2022", "dom"]
   },
+  "typedocOptions": {
+    "entryPoints": ["src/"],
+    "entryPointStrategy": "expand",
+    "out": "docs"
+  },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,

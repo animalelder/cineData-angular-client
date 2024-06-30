@@ -12,6 +12,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { timer } from 'rxjs';
 import { Router } from '@angular/router';
 
+/**
+ * UserLoginFormComponent
+ * @class
+ * @classdesc This is the component class for the user login form
+ */
 @Component({
   selector: 'app-user-login-form',
   templateUrl: './user-login-form.component.html',
@@ -21,6 +26,12 @@ export class UserLoginFormComponent {
   @Input() userData = { username: '', password: '' };
   loading = false;
 
+  /**
+   * @constructor
+   * @param {FetchApiDataService} fetchApiData - This injects the API calls we created in 6.2
+   * @param {MatDialogRef} dialogRef - This injects the reference to the dialog it was opened from
+   * @param {MatSnackBar} snackBar - This injects the MatSnackBar module to display notifications back to the user
+   */
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserLoginFormComponent>,
@@ -28,6 +39,12 @@ export class UserLoginFormComponent {
     public router: Router
   ) {}
 
+  /**
+   * @method
+   * This method sends the form inputs to the backend
+   * Once the user is logged in, the dialog will close
+   * The userData and token are saved to local storage
+   */
   loginUser(): void {
     this.loading = true;
     this.fetchApiData.userLogin(this.userData).subscribe(
@@ -44,6 +61,7 @@ export class UserLoginFormComponent {
       },
       (result) => {
         this.loading = false;
+        console.log(result);
         this.snackBar.open('Login failed. No such user with password.', 'OK', {
           duration: 2000,
         });

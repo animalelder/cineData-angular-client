@@ -8,10 +8,20 @@ const apiUrl = 'https://cinedata-movie-api.onrender.com/';
 @Injectable({
   providedIn: 'root',
 })
+
+/**
+ * This service contains all the API calls for the app
+ * @class FetchApiDataService
+ * @constructor
+ * @param {HttpClient} private http - Injects HttpClient
+ */
 export class FetchApiDataService {
   constructor(private http: HttpClient) {}
 
-  /** Every public method uses this to extract the response data */
+  /** Every public method uses this to extract the response data
+   * @param {Object} res - API response
+   * @returns {any} - Response data
+   */
   private extractResponseData(res: Object): any {
     const body = res;
     return body || {};
@@ -58,7 +68,7 @@ export class FetchApiDataService {
   /**
    * Returns a single movie by title
    * @param {string} title Movie Title
-   * @returns Object with movie details
+   * @returns {Observable<any>} Object with movie details
    */
   public getMovie(title: string): Observable<any> {
     const token = localStorage.getItem('token');
@@ -75,7 +85,7 @@ export class FetchApiDataService {
   /**
    * Get information about a director by name
    * @param {string} directorName  Director's Name
-   * @returns Details of the queried director
+   * @returns {Observable<any>} Details of the queried director
    */
   public getDirector(directorName: string): Observable<any> {
     const token = localStorage.getItem('token');
@@ -92,7 +102,7 @@ export class FetchApiDataService {
   /**
    * Get information about a genre by name
    * @param {string} genreName Genre Name
-   * @returns Details of the queried genre
+   * @returns {Observable<any>} Details of the queried genre
    */
   public getGenre(genreName: string): Observable<any> {
     const token = localStorage.getItem('token');
@@ -109,7 +119,7 @@ export class FetchApiDataService {
   /**
    * Get information about a user by username
    * @param userDetails Username, Password, Email, Birthday
-   * @returns User details
+   * @returns {Observable<any>} User details
    */
   public getUser(userDetails: any): Observable<any> {
     const token = localStorage.getItem('token');
@@ -126,7 +136,7 @@ export class FetchApiDataService {
   /**
    * Get favorite movies of user
    * @param userDetails User details
-   * @returns Favorite movies
+   * @returns {Observable<any>} Favorite movies
    */
   public getFavoriteMovies(userDetails: any): Observable<any> {
     const token = localStorage.getItem('token');
@@ -143,7 +153,7 @@ export class FetchApiDataService {
   /**
    * Add a movie to favorites
    * @param movie ID Movie to add
-   * @returns {Object} Updated user details
+   * @returns {Observable<any>} Updated user details
    */
   public addFavoriteMovies(movie: any): Observable<any> {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
@@ -160,8 +170,8 @@ export class FetchApiDataService {
 
   /**
    * Remove a movie from favorites
-   * @param movie ID of Movie to remove
-   * @returns {Object} Updated user details
+   * @param {object} movie ID to identify movie
+   * @returns {Observable<any>} Updated user details
    */
   public deleteFavoriteMovies(movie: any): Observable<any> {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
@@ -180,7 +190,7 @@ export class FetchApiDataService {
   /**
    * Edit user information
    * @param userDetails
-   * @returns {Object} Updated user details
+   * @returns {Observable<any>} Updated user details
    */
   public editUser(userDetails: any): Observable<any> {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
@@ -197,7 +207,7 @@ export class FetchApiDataService {
 
   /**
    * Delete user account
-   * @returns Observable the API response
+   * @returns {Observable<any>} the API response
    */
   public deleteUser(): Observable<any> {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
@@ -211,7 +221,10 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  /** All public methods use this to handle errors */
+  /** All public methods use this to handle errors
+   * @param {HttpErrorResponse} error - API error response
+   * @returns {Error} - Error message
+   */
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.

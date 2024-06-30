@@ -30,19 +30,24 @@ $width: minmax(88cqw, 430px);
   transform: translate(-50%, -50%);
   left: 50%;
   top: 50%;
-
+  min-width: fit-content;
   width: $width;
   height: 520px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(199, 179, 194, 0.5);
   border-radius: 15px;
-  backdrop-filter: blur(10px);
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border: 2px solid rgba(255, 255, 255, 0.5);
   box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
   padding: 2rem 1rem;
   display: grid;
   grid-template-areas: 't t t t' 'i i i i' 'a a b b';
   justify-content: space-evenly;
   justify-items: center;
+}
+
+.page:hover {
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.5);
+  background: rgb(176, 169, 176);
 }
 
 .page h1 {
@@ -65,4 +70,6 @@ $width: minmax(88cqw, 430px);
 
 .page svg {
   grid-area: i;
+  max-width: 95%;
+  object-fit: contain;
 }
