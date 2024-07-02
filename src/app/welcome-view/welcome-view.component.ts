@@ -24,7 +24,7 @@ export class WelcomeViewComponent implements OnInit {
   ngOnInit(): void {}
 
   /**
-   * @method openUserRegistrationDialog - Opens the user registration dialog
+   * @function openUserRegistrationDialog - Opens the user registration dialog
    */
   openUserRegistrationDialog(): void {
     this.dialog.open(UserRegistrationFormComponent, {
@@ -32,7 +32,7 @@ export class WelcomeViewComponent implements OnInit {
     });
   }
   /**
-   * @method openUserLoginDialog - Opens the user login dialog
+   * @function openUserLoginDialog - Opens the user login dialog
    */
   openUserLoginDialog(): void {
     this.dialog.open(UserLoginFormComponent, {

@@ -47,7 +47,7 @@ export class UserUpdateFormComponent implements OnInit {
   ngOnInit(): void {}
 
   /**
-   * @method updateUser - Sends the updated user data to the backend
+   * @function updateUser - Sends the updated user data to the backend
    */
   updateUser(): void {
     this.loading = true;
