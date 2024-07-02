@@ -5,6 +5,7 @@ import { UserUpdateFormComponent } from '../user-update-form/user-update-form.co
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { FetchApiDataService } from '../fetch-api-data.service';
+import { User } from '../data/user';
 
 /**
  * ProfileViewComponent
@@ -18,8 +19,7 @@ import { FetchApiDataService } from '../fetch-api-data.service';
   inputs: ['user'],
 })
 export class ProfileViewComponent implements OnInit {
-  @Input() updatedUser: any;
-  @Input() user: any = JSON.parse(localStorage.getItem('user') || '');
+  @Input() user: User = JSON.parse(localStorage.getItem('user') || '');
 
   /**
    * @description The constructor of `ProfileViewComponent`
@@ -47,7 +47,7 @@ export class ProfileViewComponent implements OnInit {
    * After the user data is fetched, it is stored in the user variable
    */
   getUser(): void {
-    let localUser: {} = JSON.parse(localStorage.getItem('user') || '');
+    let localUser: User = JSON.parse(localStorage.getItem('user') || '');
     this.fetchApiData.getUser(localUser).subscribe((resp: any) => {
       this.user = resp;
       console.log(this.user);

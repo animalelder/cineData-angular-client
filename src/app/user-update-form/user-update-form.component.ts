@@ -3,7 +3,7 @@ import { Component, OnInit, Input, Inject, Output } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FetchApiDataService } from '../fetch-api-data.service';
-
+import { User } from '../data/user';
 /**
  * UserUpdateFormComponent
  * @class
@@ -15,7 +15,7 @@ import { FetchApiDataService } from '../fetch-api-data.service';
   styleUrl: './user-update-form.component.scss',
 })
 export class UserUpdateFormComponent implements OnInit {
-  @Input() userData = {
+  @Input() userData: Partial<User> = {
     username: this.data.username,
     password: '',
     email: this.data.email,

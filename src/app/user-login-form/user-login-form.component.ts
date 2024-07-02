@@ -11,6 +11,7 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { timer } from 'rxjs';
 import { Router } from '@angular/router';
+import { User } from '../data/user';
 
 /**
  * UserLoginFormComponent
@@ -23,7 +24,7 @@ import { Router } from '@angular/router';
   styleUrl: './user-login-form.component.scss',
 })
 export class UserLoginFormComponent {
-  @Input() userData = { username: '', password: '' };
+  @Input() userData: Partial<User> = { username: '', password: '' };
   loading = false;
 
   /**

@@ -10,6 +10,8 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 // This import is used to display notifications back to the user
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+import { User } from '../data/user';
+
 /**
  * UserRegistrationFormComponent
  * @class
@@ -21,13 +23,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./user-registration-form.component.scss'],
 })
 export class UserRegistrationFormComponent implements OnInit {
-  @Input({ alias: 'user' }) userData = { username: '', password: '', email: '', birthdate: '' };
+  @Input({ alias: 'user' }) userData: Partial<User> = { username: '', password: '', email: '', birthdate: '' };
   loading = false;
 
   /**
    * @constructor
-   * @param {FetchApiDataService} fetchApiData - This injects the API calls we created in 6.2
-   * @param {MatDialogRef} dialogRef - This injects the reference to the dialog it was opened from
+   * @param {FetchApiDataService} fetchApiData - This injects the fetch service
+   * @param {MatDialogRef} dialogRef - This injects the reference to the dialog so we can close it
    * @param {MatSnackBar} snackBar - This injects the MatSnackBar module to display notifications back to the user
    */
   constructor(
