@@ -36,14 +36,14 @@ export class ProfileViewComponent implements OnInit {
     private router: Router
   ) {}
   /**
-   * @method ngOnInit get user data on initialization
+   * @function ngOnInit get user data on initialization
    */
   ngOnInit(): void {
     this.getUser();
   }
 
   /**
-   * @method getUser - Gets the user data from the backend
+   * @function getUser - Gets the user data from the backend
    * After the user data is fetched, it is stored in the user variable
    */
   getUser(): void {
@@ -56,7 +56,7 @@ export class ProfileViewComponent implements OnInit {
   }
 
   /**
-   * @method openUpdateUserDialog - Opens the user update dialog
+   * @function openUpdateUserDialog - Opens the user update dialog
    * After the dialog is closed, the diplayed user data is updated
    */
   openUpdateUserDialog(): void {
@@ -76,7 +76,7 @@ export class ProfileViewComponent implements OnInit {
   }
 
   /**
-   * @method deleteUser - Deletes the user account
+   * @function deleteUser - Deletes the user account
    * After the user is deleted, the user is logged out and the welcome view is displayed
    */
   deleteUser(): void {

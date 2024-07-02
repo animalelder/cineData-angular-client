@@ -31,7 +31,7 @@ export class InfoModalComponent implements OnInit {
   ngOnInit(): void {}
 
   /**
-   * @method closeModal - Closes the dialog, which was opened from the MovieCardComponent
+   * @function closeModal - Closes the dialog, which was opened from the MovieCardComponent
    */
   closeModal(): void {
     this.dialogRef.close();

@@ -41,7 +41,7 @@ export class UserLoginFormComponent {
   ) {}
 
   /**
-   * @method loginUser - This method sends the form inputs to the backend
+   * @function loginUser - This method sends the form inputs to the backend
    * This method sends the form inputs to the backend
    * Once the user is logged in, the dialog will close
    * Now the user has a token to authorize API calls

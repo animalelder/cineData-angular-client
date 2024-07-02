@@ -43,7 +43,7 @@ export class MovieCardComponent implements OnInit {
   }
 
   /**
-   * @method getMovies - Gets the movies from the backend
+   * @function getMovies - Gets the movies from the backend
    * After the movies are fetched, they are stored in the movies variable
    * If the user is on the favorites page, only the favorite movies are displayed
    * @returns {Movie[]} movies - An array of movie objects
@@ -68,7 +68,7 @@ export class MovieCardComponent implements OnInit {
   }
 
   /**
-   * @method getUserFavMovies - Gets the user data from the backend
+   * @function getUserFavMovies - Gets the user data from the backend
    * After the user data is fetched, it is stored in the user variable
    * The user's favorite movies are stored in the favoriteMovies variable
    * @returns {Movie[]} filtered array of favorite movies
@@ -88,7 +88,7 @@ export class MovieCardComponent implements OnInit {
   }
 
   /**
-   * @method getGenre - Opens a dialog with the genre information
+   * @function getGenre - Opens a dialog with the genre information
    * @param {Partial<Movie>} movie - The movie object
    */
   getGenre(movie: Movie): void {
@@ -99,7 +99,7 @@ export class MovieCardComponent implements OnInit {
   }
 
   /**
-   * @method getDirector - Opens a dialog with the director information
+   * @function getDirector - Opens a dialog with the director information
    * @param {Partial<Movie>} movie - The movie object
    */
   getDirector(movie: Movie): void {
@@ -114,7 +114,7 @@ export class MovieCardComponent implements OnInit {
   }
 
   /**
-   * @method getSynopsis - Opens a dialog with the movie synopsis
+   * @function getSynopsis - Opens a dialog with the movie synopsis
    * @param {Partial<Movie>} movie - The movie object
    */
   getSynopsis(movie: Movie): void {
@@ -126,7 +126,7 @@ export class MovieCardComponent implements OnInit {
   }
 
   /**
-   * @method toggleFavoriteMovie - Toggles the favorite movie status
+   * @function toggleFavoriteMovie - Toggles the favorite movie status
    * @param {Partial<Movie>} movie - The movie object
    * The user's favorite movies are updated on the backend and in local storage
    * If the movie is a favorite, it is removed from the user's favorites
@@ -168,7 +168,7 @@ export class MovieCardComponent implements OnInit {
   }
 
   /**
-   * @method isFavoriteMovie - Checks if the movie is a favorite
+   * @function isFavoriteMovie - Checks if the movie is a favorite
    * @param {Movie} movie - The movie object
    * @returns {Boolean} - True if the movie is a favorite, false if not
    */
