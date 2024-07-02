@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from './user';
@@ -31,17 +31,17 @@ export class FetchApiDataService {
 
   /**
    * Create a new user account
-   * @param {Object} userDetails - Username, Password, Email, Birthday
+   * @param {Partial<User>} userDetails - Username, Password, Email, Birthday
    * @returns {Observable<any>} Observable for the API response
    */
-  public userRegistration(userDetails: Partial<User>): Observable<any> {
+  public userRegistration(userDetails: Partial<User>): Observable<any | Error> {
     console.log(userDetails);
     return this.http.post(apiUrl + 'users', userDetails).pipe(catchError(this.handleError));
   }
 
   /**
    * Login a user
-   * @param {Object} userDetails Login details
+   * @param {Partial<User>} userDetails Login details
    * @returns
    */
   public userLogin(userDetails: Partial<User>): Observable<any | Error> {
@@ -120,8 +120,8 @@ export class FetchApiDataService {
 
   /**
    * Get information about a user by username
-   * @param userDetails Username, Password, Email, Birthday
-   * @returns {Observable<any>} User details
+   * @param {Partial<User>} userDetails Username
+   * @returns {Observable<User>} User details
    */
   public getUser(userDetails: Partial<User>): Observable<User> {
     const token = localStorage.getItem('token');
@@ -137,8 +137,8 @@ export class FetchApiDataService {
 
   /**
    * Get favorite movies of user
-   * @param userDetails User details
-   * @returns {Observable<any>} Favorite movies
+   * @param {Partial<User>} userDetails User details
+   * @returns {Observable<Movie[]>} Favorite movies
    */
   public getFavoriteMovies(userDetails: User): Observable<any> {
     const token = localStorage.getItem('token');
@@ -154,8 +154,8 @@ export class FetchApiDataService {
 
   /**
    * Add a movie to favorites
-   * @param movie ID Movie to add
-   * @returns {Observable<any>} Updated user details
+   * @param {Movie} movie ID Movie to add
+   * @returns {Observable<User>} Updated user details
    */
   public addFavoriteMovies(movie: Movie): Observable<any> {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
@@ -172,8 +172,8 @@ export class FetchApiDataService {
 
   /**
    * Remove a movie from favorites
-   * @param {object} movie ID to identify movie
-   * @returns {Observable<any>} Updated user details
+   * @param {Movie} movie ID to identify movie
+   * @returns {Observable<User>} Updated user details
    */
   public deleteFavoriteMovies(movie: Movie): Observable<any> {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
@@ -191,8 +191,8 @@ export class FetchApiDataService {
 
   /**
    * Edit user information
-   * @param userDetails
-   * @returns {Observable<any>} Updated user details
+   * @param {Partial<User>} userDetails username, password, email, birthdate
+   * @returns {Observable<User>} Updated user details
    */
   public editUser(userDetails: Partial<User>): Observable<User> {
     const user = JSON.parse(localStorage.getItem('user') || '{}');

@@ -36,7 +36,7 @@ export class ProfileViewComponent implements OnInit {
     private router: Router
   ) {}
   /**
-   * @method ngOnInit automatically get user data on initialization
+   * @method ngOnInit get user data on initialization
    */
   ngOnInit(): void {
     this.getUser();
@@ -57,7 +57,7 @@ export class ProfileViewComponent implements OnInit {
 
   /**
    * @method openUpdateUserDialog - Opens the user update dialog
-   * After the dialog is closed, the user data is updated
+   * After the dialog is closed, the diplayed user data is updated
    */
   openUpdateUserDialog(): void {
     this.dialog.open(UserUpdateFormComponent, {

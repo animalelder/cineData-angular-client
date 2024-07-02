@@ -30,7 +30,7 @@ export class MovieCardComponent implements OnInit {
   /**
    * @description The constructor of `MovieCardComponent`
    * @constructor
-   * @param {FetchApiDataService} fetchApiData - Injects service to fetch API data
+   * @param {FetchApiDataService} fetchApiData - Injects service to fetch data
    * @param {MatDialog} dialog - Injects service to open Material Design dialogs
    * @param {MatSnackBar} snackBar - Injects service to display notifications back to the user
    */
@@ -46,7 +46,7 @@ export class MovieCardComponent implements OnInit {
    * @method getMovies - Gets the movies from the backend
    * After the movies are fetched, they are stored in the movies variable
    * If the user is on the favorites page, only the favorite movies are displayed
-   * @returns {Movies[]} movies - An array of movie objects
+   * @returns {Movie[]} movies - An array of movie objects
    */
   getMovies(): Movie[] {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
@@ -71,7 +71,7 @@ export class MovieCardComponent implements OnInit {
    * @method getUserFavMovies - Gets the user data from the backend
    * After the user data is fetched, it is stored in the user variable
    * The user's favorite movies are stored in the favoriteMovies variable
-   * @returns {Movies[]} filtered array of favorite movies
+   * @returns {Movie[]} filtered array of favorite movies
    */
   getUserFavMovies(): any {
     // let user: User = JSON.parse(localStorage.getItem('user') || '');
@@ -89,7 +89,7 @@ export class MovieCardComponent implements OnInit {
 
   /**
    * @method getGenre - Opens a dialog with the genre information
-   * @param {Movie} movie - The movie object
+   * @param {Partial<Movie>} movie - The movie object
    */
   getGenre(movie: Movie): void {
     this.dialog.open(InfoModalComponent, {
@@ -100,7 +100,7 @@ export class MovieCardComponent implements OnInit {
 
   /**
    * @method getDirector - Opens a dialog with the director information
-   * @param {Movie} movie - The movie object
+   * @param {Partial<Movie>} movie - The movie object
    */
   getDirector(movie: Movie): void {
     let age = 2024 - Number(movie.director.birth.slice(0, 4));
@@ -115,7 +115,7 @@ export class MovieCardComponent implements OnInit {
 
   /**
    * @method getSynopsis - Opens a dialog with the movie synopsis
-   * @param {Movie} movie - The movie object
+   * @param {Partial<Movie>} movie - The movie object
    */
   getSynopsis(movie: Movie): void {
     let synopsis = movie.description.replace(/(\w{3,10})\.\s/g, '$1.\n\n');
@@ -127,7 +127,7 @@ export class MovieCardComponent implements OnInit {
 
   /**
    * @method toggleFavoriteMovie - Toggles the favorite movie status
-   * @param {Movie} movie - The movie object
+   * @param {Partial<Movie>} movie - The movie object
    * The user's favorite movies are updated on the backend and in local storage
    * If the movie is a favorite, it is removed from the user's favorites
    * Else the movie is added to user's favorites
