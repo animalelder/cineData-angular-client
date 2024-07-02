@@ -2,7 +2,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { FetchApiDataService } from '../fetch-api-data.service';
+import { FetchApiDataService } from '../data/fetch-api-data.service';
 import { InfoModalComponent } from '../info-modal/info-modal.component';
 import { Movie } from '../data/movie';
 import { User } from '../data/user';
@@ -18,10 +18,9 @@ import { User } from '../data/user';
   styleUrls: ['./movie-card.component.scss'],
 })
 export class MovieCardComponent implements OnInit {
-  @Input() filteredFaves: boolean = false;
+  @Input() filteredFaves = false;
 
   movies: Movie[] = [];
-  userData: any = {};
   user: User = JSON.parse(localStorage.getItem('user') ?? '{}');
   favoriteMovies: any = [];
   favMovies: any[] = [];

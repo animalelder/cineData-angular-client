@@ -34,7 +34,7 @@ export class FetchApiDataService {
    * @param {Object} userDetails - Username, Password, Email, Birthday
    * @returns {Observable<any>} Observable for the API response
    */
-  public userRegistration(userDetails: any): Observable<any> {
+  public userRegistration(userDetails: Partial<User>): Observable<any> {
     console.log(userDetails);
     return this.http.post(apiUrl + 'users', userDetails).pipe(catchError(this.handleError));
   }
@@ -44,7 +44,7 @@ export class FetchApiDataService {
    * @param {Object} userDetails Login details
    * @returns
    */
-  public userLogin(userDetails: any): Observable<any | Error> {
+  public userLogin(userDetails: Partial<User>): Observable<any | Error> {
     console.log(userDetails);
     return this.http
       .post(apiUrl + `login?Username=${userDetails.username}&Password=${userDetails.password}`, userDetails)
@@ -123,7 +123,7 @@ export class FetchApiDataService {
    * @param userDetails Username, Password, Email, Birthday
    * @returns {Observable<any>} User details
    */
-  public getUser(userDetails: any): Observable<User> {
+  public getUser(userDetails: Partial<User>): Observable<User> {
     const token = localStorage.getItem('token');
     return this.http
       .get(apiUrl + 'users/' + userDetails.username, {
@@ -194,7 +194,7 @@ export class FetchApiDataService {
    * @param userDetails
    * @returns {Observable<any>} Updated user details
    */
-  public editUser(userDetails: User): Observable<User> {
+  public editUser(userDetails: Partial<User>): Observable<User> {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');
     return this.http

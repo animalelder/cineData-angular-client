@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { UserUpdateFormComponent } from '../user-update-form/user-update-form.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
-import { FetchApiDataService } from '../fetch-api-data.service';
+import { FetchApiDataService } from '../data/fetch-api-data.service';
 import { User } from '../data/user';
 
 /**
