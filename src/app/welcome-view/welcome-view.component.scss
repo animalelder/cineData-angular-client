@@ -31,6 +31,7 @@ $width: minmax(88cqw, 430px);
   left: 50%;
   top: 50%;
   min-width: fit-content;
+  max-width: 400px;
   width: $width;
   height: 520px;
   background: rgba(199, 179, 194, 0.5);

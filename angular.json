@@ -91,7 +91,15 @@
           }
         },
         "deploy": {
-          "builder": "angular-cli-ghpages:deploy"
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "project": "cineData-angular-client",
+            "baseHref": "/cineData-angular-client/",
+            "remote": "gh-pages",
+            "branch": "gh-pages",
+            "dir": "dist/cine-data-angular-client/browser/",
+            "buildTarget": "cineData-angular-client:build:production"
+          }
         }
       }
     }

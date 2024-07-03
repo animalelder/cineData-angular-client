@@ -9,7 +9,6 @@ import { FetchApiDataService } from '../data/fetch-api-data.service';
 
 // This import is used to display notifications back to the user
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { timer } from 'rxjs';
 import { Router } from '@angular/router';
 import { User } from '../data/user';
 
