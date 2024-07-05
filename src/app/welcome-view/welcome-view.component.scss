@@ -41,7 +41,7 @@ $width: minmax(88cqw, 430px);
   box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
   padding: 2rem 1rem;
   display: grid;
-  grid-template-areas: 't t t t' 'i i i i' 'a a b b';
+  grid-template-areas: "t t t t" "i i i i" "a a b b";
   justify-content: space-evenly;
   justify-items: center;
 }
@@ -73,4 +73,13 @@ $width: minmax(88cqw, 430px);
   grid-area: i;
   max-width: 95%;
   object-fit: contain;
+}
+
+@media (max-width: 360px) {
+  .page {
+    width: 100%;
+    height: 100vh;
+    border: none;
+    border-radius: 0px;
+  }
 }
