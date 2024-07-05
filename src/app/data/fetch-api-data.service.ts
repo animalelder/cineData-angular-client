@@ -1,10 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError } from 'rxjs/operators';
-import { HttpClient, HttpHeaders, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
+import { Director, Genre, Movie } from './movie';
 import { User } from './user';
-import { Movie, Genre, Director } from './movie';
 
 const apiUrl = 'https://cinedata-movie-api.onrender.com/';
 @Injectable({
@@ -21,10 +25,10 @@ export class FetchApiDataService {
   constructor(private http: HttpClient) {}
 
   /** Every public method uses this to extract the response data
-   * @param {Object} res - API response
+   * @param {object} res - API response
    * @returns {any} - Response data
    */
-  private extractResponseData(res: Object): any {
+  private extractResponseData(res: object): any {
     const body = res;
     return body || {};
   }
@@ -34,9 +38,13 @@ export class FetchApiDataService {
    * @param {Partial<User>} userDetails - Username, Password, Email, Birthday
    * @returns {Observable<any>} Observable for the API response
    */
-  public userRegistration(userDetails: Partial<User>): Observable<any | Error> {
+  public userRegistration(
+    userDetails: Partial<User>,
+  ): Observable<Error | User> {
     console.log(userDetails);
-    return this.http.post(apiUrl + 'users', userDetails).pipe(catchError(this.handleError));
+    return this.http
+      .post(apiUrl + 'users', userDetails)
+      .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
   /**
@@ -47,7 +55,11 @@ export class FetchApiDataService {
   public userLogin(userDetails: Partial<User>): Observable<any | Error> {
     console.log(userDetails);
     return this.http
-      .post(apiUrl + `login?Username=${userDetails.username}&Password=${userDetails.password}`, userDetails)
+      .post(
+        apiUrl +
+          `login?Username=${userDetails.username}&Password=${userDetails.password}`,
+        userDetails,
+      )
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
@@ -55,7 +67,7 @@ export class FetchApiDataService {
    * Get all movies (Authorization required)
    * @returns Array of all movies
    */
-  public getAllMovies(): Observable<Movie[]> {
+  public getAllMovies(): Observable<Error | Movie[]> {
     const token = localStorage.getItem('token');
     return this.http
       .get(apiUrl + 'movies', {
@@ -70,9 +82,9 @@ export class FetchApiDataService {
   /**
    * Returns a single movie by title
    * @param {string} title Movie Title
-   * @returns {Observable<any>} Object with movie details
+   * @returns {Observable<any>} object with movie details
    */
-  public getMovie(title: string): Observable<Movie> {
+  public getMovie(title: string): Observable<Error | Movie> {
     const token = localStorage.getItem('token');
     return this.http
       .get(apiUrl + 'movies/' + title, {
@@ -89,7 +101,7 @@ export class FetchApiDataService {
    * @param {string} directorName  Director's Name
    * @returns {Observable<any>} Details of the queried director
    */
-  public getDirector(directorName: string): Observable<Director> {
+  public getDirector(directorName: string): Observable<Error | Director> {
     const token = localStorage.getItem('token');
     return this.http
       .get(apiUrl + 'movies/directors/' + directorName, {
@@ -106,7 +118,7 @@ export class FetchApiDataService {
    * @param {string} genreName Genre Name
    * @returns {Observable<any>} Details of the queried genre
    */
-  public getGenre(genreName: string): Observable<Genre> {
+  public getGenre(genreName: string): Observable<Error | Genre> {
     const token = localStorage.getItem('token');
     return this.http
       .get(apiUrl + 'movies/genre/' + genreName, {
@@ -123,7 +135,7 @@ export class FetchApiDataService {
    * @param {Partial<User>} userDetails Username
    * @returns {Observable<User>} User details
    */
-  public getUser(userDetails: Partial<User>): Observable<User> {
+  public getUser(userDetails: Partial<User>): Observable<Error | User> {
     const token = localStorage.getItem('token');
     return this.http
       .get(apiUrl + 'users/' + userDetails.username, {
@@ -161,12 +173,20 @@ export class FetchApiDataService {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');
     return this.http
-      .put(apiUrl + 'users/' + user.username + '/favorites/' + encodeURIComponent(movie._id), null, {
-        headers: new HttpHeaders({
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        }),
-      })
+      .put(
+        apiUrl +
+          'users/' +
+          user.username +
+          '/favorites/' +
+          encodeURIComponent(movie._id),
+        null,
+        {
+          headers: new HttpHeaders({
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          }),
+        },
+      )
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
@@ -180,12 +200,19 @@ export class FetchApiDataService {
     const token = localStorage.getItem('token');
 
     return this.http
-      .delete(apiUrl + 'users/' + user.username + '/favorites/' + encodeURIComponent(movie._id), {
-        headers: new HttpHeaders({
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        }),
-      })
+      .delete(
+        apiUrl +
+          'users/' +
+          user.username +
+          '/favorites/' +
+          encodeURIComponent(movie._id),
+        {
+          headers: new HttpHeaders({
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          }),
+        },
+      )
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
@@ -194,7 +221,7 @@ export class FetchApiDataService {
    * @param {Partial<User>} userDetails username, password, email, birthdate
    * @returns {Observable<User>} Updated user details
    */
-  public editUser(userDetails: Partial<User>): Observable<User> {
+  public editUser(userDetails: Partial<User>): Observable<Error | User> {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');
     return this.http
@@ -227,7 +254,7 @@ export class FetchApiDataService {
    * @param {HttpErrorResponse} error - API error response
    * @returns {Error} - Error message
    */
-  private handleError(error: HttpErrorResponse) {
+  private handleError(error: HttpErrorResponse): Observable<Error> {
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error);
@@ -236,9 +263,14 @@ export class FetchApiDataService {
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong.
-      console.error(`Backend returned code ${error.status}, body was: `, error.error);
+      console.error(
+        `Backend returned code ${error.status}, body was: `,
+        error.error,
+      );
     }
     // Return an observable with a user-facing error message.
-    return throwError(() => new Error('Something bad happened; please try again later.'));
+    return throwError(
+      () => new Error('Something bad happened; please try again later.'),
+    );
   }
 }
