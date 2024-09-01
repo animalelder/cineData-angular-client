@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
-import { HttpClient, HttpHeaders, HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpErrorResponse,
+  HttpResponse,
+} from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from './user';
@@ -36,7 +41,9 @@ export class FetchApiDataService {
    */
   public userRegistration(userDetails: Partial<User>): Observable<any | Error> {
     console.log(userDetails);
-    return this.http.post(apiUrl + 'users', userDetails).pipe(catchError(this.handleError));
+    return this.http
+      .post(apiUrl + 'users', userDetails)
+      .pipe(catchError(this.handleError));
   }
 
   /**
@@ -47,7 +54,11 @@ export class FetchApiDataService {
   public userLogin(userDetails: Partial<User>): Observable<any | Error> {
     console.log(userDetails);
     return this.http
-      .post(apiUrl + `login?Username=${userDetails.username}&Password=${userDetails.password}`, userDetails)
+      .post(
+        apiUrl +
+          `login?Username=${userDetails.username}&Password=${userDetails.password}`,
+        userDetails,
+      )
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
@@ -161,12 +172,20 @@ export class FetchApiDataService {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');
     return this.http
-      .put(apiUrl + 'users/' + user.username + '/favorites/' + encodeURIComponent(movie._id), null, {
-        headers: new HttpHeaders({
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        }),
-      })
+      .put(
+        apiUrl +
+          'users/' +
+          user.username +
+          '/favorites/' +
+          encodeURIComponent(movie._id),
+        null,
+        {
+          headers: new HttpHeaders({
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          }),
+        },
+      )
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
@@ -180,12 +199,19 @@ export class FetchApiDataService {
     const token = localStorage.getItem('token');
 
     return this.http
-      .delete(apiUrl + 'users/' + user.username + '/favorites/' + encodeURIComponent(movie._id), {
-        headers: new HttpHeaders({
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        }),
-      })
+      .delete(
+        apiUrl +
+          'users/' +
+          user.username +
+          '/favorites/' +
+          encodeURIComponent(movie._id),
+        {
+          headers: new HttpHeaders({
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          }),
+        },
+      )
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
@@ -223,6 +249,10 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
+  public initializeApi(): Observable<any> {
+    return this.http.get(apiUrl).pipe(catchError(this.handleError));
+  }
+
   /** All public methods use this to handle errors
    * @param {HttpErrorResponse} error - API error response
    * @returns {Error} - Error message
@@ -236,9 +266,14 @@ export class FetchApiDataService {
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong.
-      console.error(`Backend returned code ${error.status}, body was: `, error.error);
+      console.error(
+        `Backend returned code ${error.status}, body was: `,
+        error.error,
+      );
     }
     // Return an observable with a user-facing error message.
-    return throwError(() => new Error('Something bad happened; please try again later.'));
+    return throwError(
+      () => new Error('Something bad happened; please try again later.'),
+    );
   }
 }
